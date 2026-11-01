@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INC-03 · Serveurs Linux · Jean-Philippe Rebischung</title>
+<meta name="description" content="Ticket INC-03 (Serveurs Linux) : Alerte de supervision : un agent injoignable, une règle de pare-feu local disparue.">
+<meta name="author" content="Jean-Philippe Rebischung">
+<meta property="og:title" content="INC-03 · Serveurs Linux · Jean-Philippe Rebischung">
+<meta property="og:description" content="Ticket INC-03 (Serveurs Linux) : Alerte de supervision : un agent injoignable, une règle de pare-feu local disparue.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../img/logo/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="../index.html">
+      <img src="../img/logo/favicon.svg" width="46" height="46" alt="">
+      <span><b>Jean-Philippe Rebischung</b><small>Technicien Supérieur Systèmes et Réseaux</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="../competences.html" aria-current="page">Compétences</a>
+      <a href="../projet.html">Projet</a>
+      <a href="../parcours.html">Parcours</a>
+      <a href="../films.html">Films</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-pressed="false">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      <span class="label">Clair</span>
+    </button>
+  </div>
+</header>
+<main id="contenu">
+<div class="appbar"><div class="wrap appbar-in"><span class="module">Assistance</span><span class="crumbs"><a href="../competences.html">Tickets</a> › INC-03</span></div></div>
+  <section class="wrap ticket-head">
+    <p class="eyebrow">BC01 · Serveurs Linux</p>
+    <h1><span class="mono tid">INC-03</span> Un serveur Linux ne remonte plus dans Zabbix</h1>
+    <div class="guide-line">
+      <img src="../img/personnages/tux-avatar.webp" width="96" height="96" alt="" class="av">
+      <p class="bubble side"><span class="who">Tux · Linux</span>« Le service tourne » ne veut pas dire « le service répond ». Ici, l'agent écoutait bien : c'est le pare-feu local qui jetait les demandes.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="tool ticket">
+      <div class="thread">
+        <article class="entry k-demande">
+          <header><span class="kind">Demande</span><b>Alerte de supervision</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Zabbix signale que l'agent du serveur <strong>VM-syslog-JP</strong> n'est plus disponible depuis 15h17 : la connexion TCP n'est plus établie. Dans la collecte de données, l'indicateur de disponibilité de l'hôte est rouge.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Interroger l'agent depuis le serveur Zabbix</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p><code>zabbix_get -s VM-syslog-JP -p 10050 -k agent.version</code> : <code>Connection timed out</code>. Un délai dépassé, c'est un paquet jeté quelque part.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Vérifier le service et l'écoute</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Sur le serveur : <code>systemctl status zabbix-agent2</code> → actif. Mais un service actif ne prouve pas qu'il répond. <code>ss -tlnp | grep 10050</code> → l'agent écoute bien sur le port 10050.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Vérifier le pare-feu local</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p><code>sudo ufw status numbered</code> : la règle qui autorise le serveur Zabbix sur le port 10050 <strong>n'apparaît plus</strong>. C'est elle qui manque.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Remettre la règle et vérifier</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p><code>sudo ufw allow from &lt;serveur Zabbix&gt; to any port 10050 proto tcp comment 'Zabbix agent passif'</code></p><p>Depuis le serveur Zabbix, <code>zabbix_get</code> renvoie la version de l'agent ; l'indicateur de l'hôte repasse au vert et le problème passe en résolu à 16h20.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Chercher pourquoi la règle a disparu</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Le journal des commandes <code>sudo</code> montre une session root ouverte vers 15h17, juste avant l'alerte. Il n'enregistre pas ce qui a été tapé dans cette session : il ne permet donc pas de <strong>prouver</strong> que la règle a été supprimée à ce moment-là. Je le note comme piste, pas comme cause.</p></div>
+        </article>
+        <article class="entry k-solution right">
+          <header><span class="kind">Solution</span><b>Solution approuvée · ticket clos</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p><strong>Cause :</strong> la règle du pare-feu local (ufw) autorisant le serveur Zabbix à joindre l'agent sur le port 10050/tcp avait disparu. Le pare-feu rejetait les demandes, d'où le délai dépassé et l'agent indiqué indisponible.</p><p><strong>Correction :</strong> règle remise en place, limitée au serveur Zabbix.</p><p><strong>Vérification :</strong> <code>zabbix_get</code> répond, indicateur de l'hôte au vert, problème résolu dans Zabbix.</p><p><strong>Piste à confirmer :</strong> pourquoi la règle a disparu. Une session root vers 15h17 est la piste la plus probable, à confirmer avec la personne concernée.</p></div>
+        </article>
+        <aside class="retenir"><b>À retenir</b><p>Je vérifie dans l'ordre : l'agent répond-il ? le service tourne-t-il ? écoute-t-il ? le pare-feu laisse-t-il passer ? Et j'écris ce qui est prouvé séparément de ce qui est probable.</p></aside>
+      </div>
+      <aside class="fields" aria-label="Champs du ticket">
+        <p class="fields-title">Ticket</p>
+        <dl>
+          <dt>Statut</dt><dd><span class="status">Clos</span></dd>
+          <dt>Type</dt><dd>Incident</dd>
+          <dt>Catégorie</dt><dd>Exploitation › Supervision et journaux</dd>
+          <dt>Source</dt><dd>Supervision</dd>
+          <dt>Urgence</dt><dd>Moyenne</dd>
+          <dt>Impact</dt><dd>Moyen</dd>
+          <dt>Priorité</dt><dd><span class="prio p-moyenne">Moyenne</span></dd>
+          <dt>Niveau</dt><dd><span class="lvl n2">N2</span></dd>
+          <dt>Durée totale</dt><dd class="mono">1 h</dd>
+        </dl>
+        <p class="fields-title">Acteurs</p>
+        <dl>
+          <dt>Demandeur</dt><dd>Jean-Philippe (technicien)</dd>
+          <dt>Attribué à</dt><dd>Jean-Philippe (technicien)</dd>
+          
+        </dl>
+        
+      </aside>
+    </div>
+
+    <nav class="pager" aria-label="Tickets voisins"><a href="inc-02.html">← INC-02 · Windows Server et Active Directory</a><a href="../competences.html">Retour à la file</a><a href="inc-04.html">INC-04 · Réseau IP →</a></nav>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <div>
+      <img class="footer-logo logo-light" src="../img/logo/jp-consulting-clair.svg" width="230" height="59" alt="JP Consulting">
+      <img class="footer-logo logo-dark" src="../img/logo/jp-consulting-sombre-transparent.svg" width="230" height="59" alt="JP Consulting">
+      <p class="signature">LAB TSSR · 2026</p>
+    </div>
+    <div>
+      <h2>Me contacter</h2>
+      <ul>
+        <li><a href="mailto:jp.rebischung@protonmail.com">jp.rebischung@protonmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-philippe-rebischung/" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/jp-rebischung" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>À voir aussi</h2>
+      <ul>
+        <li><a href="../films.html">Les films du lab</a></li>
+        <li><a href="../documentation.html">Documentation du lab</a></li>
+        <li><a href="../docs/cv-jean-philippe-rebischung.pdf" download>CV (PDF)</a></li>
+        <li><a href="../docs/dossier-projet-infrastructure.pdf" download>Dossier du projet (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    Site statique écrit en HTML et CSS, hébergé sur GitHub Pages, sans cookie ni traceur ; polices hébergées sur le site.
+    Tux d'après le dessin original de Larry Ewing. Personnages Azur, Tux et Chester, animations et films créés par génération d'images et de vidéos.
+    JP Consulting est l'entreprise fictive de mon lab ; les noms des utilisateurs dans les tickets sont fictifs.
+  </div>
+</footer>
+<script src="../js/theme.js"></script>
+</body>
+</html>

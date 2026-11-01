@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INC-01 · Support utilisateur · Jean-Philippe Rebischung</title>
+<meta name="description" content="Ticket INC-01 (Support utilisateur) : Une utilisatrice ne peut plus ouvrir sa session : le compte n'était pas verrouillé.">
+<meta name="author" content="Jean-Philippe Rebischung">
+<meta property="og:title" content="INC-01 · Support utilisateur · Jean-Philippe Rebischung">
+<meta property="og:description" content="Ticket INC-01 (Support utilisateur) : Une utilisatrice ne peut plus ouvrir sa session : le compte n'était pas verrouillé.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../img/logo/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="../index.html">
+      <img src="../img/logo/favicon.svg" width="46" height="46" alt="">
+      <span><b>Jean-Philippe Rebischung</b><small>Technicien Supérieur Systèmes et Réseaux</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="../competences.html" aria-current="page">Compétences</a>
+      <a href="../projet.html">Projet</a>
+      <a href="../parcours.html">Parcours</a>
+      <a href="../films.html">Films</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-pressed="false">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      <span class="label">Clair</span>
+    </button>
+  </div>
+</header>
+<main id="contenu">
+<div class="appbar"><div class="wrap appbar-in"><span class="module">Assistance</span><span class="crumbs"><a href="../competences.html">Tickets</a> › INC-01</span></div></div>
+  <section class="wrap ticket-head">
+    <p class="eyebrow">BC01 · Support utilisateur</p>
+    <h1><span class="mono tid">INC-01</span> « Compte bloqué ou verrouillé »</h1>
+    <div class="guide-line">
+      <img src="../img/personnages/chester-avatar.webp" width="96" height="96" alt="" class="av">
+      <p class="bubble side"><span class="who">Chester · poste client Windows 11</span>C'est moi, le poste de Christine ! Mon compte n'était pas bloqué : c'est le pavé numérique qui était éteint. Le technicien a vérifié avant de conclure.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="tool ticket">
+      <div class="thread">
+        <article class="entry k-demande">
+          <header><span class="kind">Demande</span><b>Appel de Christine</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Je reçois un appel de Christine, du service Administration : elle ne peut pas ouvrir sa session, un message indique « compte bloqué ou verrouillé ». Je prends en charge sa demande.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Vérifier l'état du compte dans l'annuaire</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Je fais confirmer à Christine qu'elle tente bien d'ouvrir sa session de domaine, puis je vérifie l'état de son compte sur le contrôleur de domaine : <strong>son compte n'a jamais été verrouillé</strong>. Le message ne correspond donc pas à la réalité de l'annuaire.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Trouver la vraie cause avec l'utilisatrice</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Je la guide pas à pas au téléphone : les chiffres de son mot de passe ne sont pas saisis, car le <strong>pavé numérique est désactivé</strong>. Je lui fais appuyer sur <kbd>Verr Num</kbd> et vérifier que le voyant est allumé.</p></div>
+        </article>
+        <article class="entry k-solution right">
+          <header><span class="kind">Solution</span><b>Solution approuvée · ticket clos</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p><strong>Cause :</strong> pavé numérique désactivé sur le poste de Christine ; les chiffres de son mot de passe n'étaient pas saisis, d'où le refus à la connexion. Son compte de domaine n'a jamais été verrouillé.</p><p><strong>Correction :</strong> pavé numérique réactivé (touche Verr Num), voyant vérifié allumé.</p><p><strong>Vérification :</strong> Christine a ouvert sa session avec son mot de passe habituel pendant l'appel. Elle a compris à quoi sert le voyant du pavé numérique.</p></div>
+        </article>
+        <aside class="retenir"><b>À retenir</b><p>Un message d'erreur n'est pas un diagnostic : je vérifie l'état réel du compte dans l'annuaire avant de déverrouiller ou de réinitialiser quoi que ce soit.</p></aside>
+      </div>
+      <aside class="fields" aria-label="Champs du ticket">
+        <p class="fields-title">Ticket</p>
+        <dl>
+          <dt>Statut</dt><dd><span class="status">Clos</span></dd>
+          <dt>Type</dt><dd>Incident</dd>
+          <dt>Catégorie</dt><dd>Comptes et accès › Mot de passe et verrouillage</dd>
+          <dt>Source</dt><dd>Téléphone</dd>
+          <dt>Urgence</dt><dd>Haute</dd>
+          <dt>Impact</dt><dd>Moyen</dd>
+          <dt>Priorité</dt><dd><span class="prio p-moyenne">Moyenne</span></dd>
+          <dt>Niveau</dt><dd><span class="lvl n1">N1</span></dd>
+          <dt>Durée totale</dt><dd class="mono">55 min</dd>
+        </dl>
+        <p class="fields-title">Acteurs</p>
+        <dl>
+          <dt>Demandeur</dt><dd>Christine (service Administration)</dd>
+          <dt>Attribué à</dt><dd>Jean-Philippe (technicien)</dd>
+          
+        </dl>
+        
+      </aside>
+    </div>
+
+    <nav class="pager" aria-label="Tickets voisins"><span></span><a href="../competences.html">Retour à la file</a><a href="inc-02.html">INC-02 · Windows Server et Active Directory →</a></nav>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <div>
+      <img class="footer-logo logo-light" src="../img/logo/jp-consulting-clair.svg" width="230" height="59" alt="JP Consulting">
+      <img class="footer-logo logo-dark" src="../img/logo/jp-consulting-sombre-transparent.svg" width="230" height="59" alt="JP Consulting">
+      <p class="signature">LAB TSSR · 2026</p>
+    </div>
+    <div>
+      <h2>Me contacter</h2>
+      <ul>
+        <li><a href="mailto:jp.rebischung@protonmail.com">jp.rebischung@protonmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-philippe-rebischung/" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/jp-rebischung" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>À voir aussi</h2>
+      <ul>
+        <li><a href="../films.html">Les films du lab</a></li>
+        <li><a href="../documentation.html">Documentation du lab</a></li>
+        <li><a href="../docs/cv-jean-philippe-rebischung.pdf" download>CV (PDF)</a></li>
+        <li><a href="../docs/dossier-projet-infrastructure.pdf" download>Dossier du projet (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    Site statique écrit en HTML et CSS, hébergé sur GitHub Pages, sans cookie ni traceur ; polices hébergées sur le site.
+    Tux d'après le dessin original de Larry Ewing. Personnages Azur, Tux et Chester, animations et films créés par génération d'images et de vidéos.
+    JP Consulting est l'entreprise fictive de mon lab ; les noms des utilisateurs dans les tickets sont fictifs.
+  </div>
+</footer>
+<script src="../js/theme.js"></script>
+</body>
+</html>

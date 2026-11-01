@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INC-07 · Accès Internet et interconnexions · Jean-Philippe Rebischung</title>
+<meta name="description" content="Ticket INC-07 (Accès Internet et interconnexions) : Un symptôme réseau, une cause qui ne l'est pas : la configuration IPsec n'était pas chargée au démarrage.">
+<meta name="author" content="Jean-Philippe Rebischung">
+<meta property="og:title" content="INC-07 · Accès Internet et interconnexions · Jean-Philippe Rebischung">
+<meta property="og:description" content="Ticket INC-07 (Accès Internet et interconnexions) : Un symptôme réseau, une cause qui ne l'est pas : la configuration IPsec n'était pas chargée au démarrage.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../img/logo/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="../index.html">
+      <img src="../img/logo/favicon.svg" width="46" height="46" alt="">
+      <span><b>Jean-Philippe Rebischung</b><small>Technicien Supérieur Systèmes et Réseaux</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="../competences.html" aria-current="page">Compétences</a>
+      <a href="../projet.html">Projet</a>
+      <a href="../parcours.html">Parcours</a>
+      <a href="../films.html">Films</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-pressed="false">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      <span class="label">Clair</span>
+    </button>
+  </div>
+</header>
+<main id="contenu">
+<div class="appbar"><div class="wrap appbar-in"><span class="module">Assistance</span><span class="crumbs"><a href="../competences.html">Tickets</a> › INC-07</span></div></div>
+  <section class="wrap ticket-head">
+    <p class="eyebrow">BC02 · Accès Internet et interconnexions</p>
+    <h1><span class="mono tid">INC-07</span> Tunnel VPN tombé sans alerte</h1>
+    <div class="guide-line">
+      <img src="../img/personnages/tux-avatar.webp" width="96" height="96" alt="" class="av">
+      <p class="bubble side"><span class="who">Tux · Linux</span>Le journal du second pare-feu a tout dit : « aucune configuration pour ce tunnel ». Il faut lire les deux extrémités.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="tool ticket">
+      <div class="thread">
+        <article class="entry k-demande">
+          <header><span class="kind">Demande</span><b>Constat</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Mon lab est réparti sur deux sites reliés par un tunnel IPsec, chacun derrière son pare-feu pfSense. En copiant un fichier vers un serveur du second site, la connexion expire. <strong>Aucune alerte</strong> n'a signalé la chute du tunnel.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Remonter le chemin</b><span class="by">Jean-Philippe</span><span class="dur">10 min</span></header>
+          <div class="entry-body"><p>Maillon par maillon, depuis mon poste : ma route et le premier pare-feu répondent.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>État du tunnel</b><span class="by">Jean-Philippe</span><span class="dur">10 min</span></header>
+          <div class="entry-body"><p>Le tunnel est déconnecté, et une reconnexion manuelle échoue.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Accès WAN</b><span class="by">Jean-Philippe</span><span class="dur">10 min</span></header>
+          <div class="entry-body"><p>Les deux accès WAN sortent correctement : l'accès Internet n'est pas en cause.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Journal du second pare-feu</b><span class="by">Jean-Philippe</span><span class="dur">15 min</span></header>
+          <div class="entry-body"><p>Il reçoit bien les demandes de connexion, mais répond qu'il n'a <strong>aucune configuration pour ce tunnel</strong>.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Configuration non chargée</b><span class="by">Jean-Philippe</span><span class="dur">20 min</span></header>
+          <div class="entry-body"><p>Le fichier de configuration existe et il est correct, mais il n'a jamais été chargé au démarrage. Je le charge à la main : le tunnel revient seul.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Garde automatique</b><span class="by">Jean-Philippe</span><span class="dur">30 min</span></header>
+          <div class="entry-body"><p>La panne est aléatoire (trois démarrages réussis sur quatre). J'ajoute une tâche planifiée toutes les cinq minutes : elle vérifie que la configuration est chargée, la recharge sinon, et laisse une trace dans le journal.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Tester la garde</b><span class="by">Jean-Philippe</span><span class="dur">25 min</span></header>
+          <div class="entry-body"><p>Je reproduis la panne pour vérifier que la garde recharge la configuration et laisse sa trace.</p></div>
+        </article>
+        <article class="entry k-solution right">
+          <header><span class="kind">Solution</span><b>Solution approuvée · ticket clos</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p><strong>Cause :</strong> la configuration IPsec du second pare-feu n'était pas chargée au démarrage, de façon aléatoire. Cause exacte non prouvée : probablement une concurrence au démarrage sur un disque lent.</p><p><strong>Correction :</strong> chargement manuel, puis une garde externe toutes les cinq minutes (le script de démarrage du pare-feu est écrasé à chaque mise à jour, d'où une garde externe).</p><p><strong>Vérification :</strong> garde testée en reproduisant la panne. Au pire, cinq minutes de coupure après un démarrage raté, au lieu d'une coupure jusqu'à une intervention manuelle.</p></div>
+        </article>
+        <aside class="retenir"><b>À retenir</b><p>Un symptôme réseau peut avoir une cause qui n'est pas réseau : je lis les journaux des deux extrémités. Une panne silencieuse ne se découvre que si quelque chose la surveille : prochaine étape, une supervision dédiée du tunnel.</p></aside>
+      </div>
+      <aside class="fields" aria-label="Champs du ticket">
+        <p class="fields-title">Ticket</p>
+        <dl>
+          <dt>Statut</dt><dd><span class="status">Clos</span></dd>
+          <dt>Type</dt><dd>Incident</dd>
+          <dt>Catégorie</dt><dd>Réseau › VPN</dd>
+          <dt>Source</dt><dd>Constat technicien</dd>
+          <dt>Urgence</dt><dd>Moyenne</dd>
+          <dt>Impact</dt><dd>Moyen</dd>
+          <dt>Priorité</dt><dd><span class="prio p-moyenne">Moyenne</span></dd>
+          <dt>Niveau</dt><dd><span class="lvl n2">N2</span></dd>
+          <dt>Durée totale</dt><dd class="mono">2 h</dd>
+        </dl>
+        <p class="fields-title">Acteurs</p>
+        <dl>
+          <dt>Demandeur</dt><dd>Jean-Philippe</dd>
+          <dt>Attribué à</dt><dd>Jean-Philippe</dd>
+          
+        </dl>
+        <p class="star-note">Incident rencontré pendant la construction du lab, saisi ensuite dans l'outil de tickets.</p>
+      </aside>
+    </div>
+
+    <nav class="pager" aria-label="Tickets voisins"><a href="inc-06.html">← INC-06 · Scripts et automatisation</a><a href="../competences.html">Retour à la file</a><a href="inc-08.html">INC-08 · Sauvegardes et restaurations →</a></nav>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <div>
+      <img class="footer-logo logo-light" src="../img/logo/jp-consulting-clair.svg" width="230" height="59" alt="JP Consulting">
+      <img class="footer-logo logo-dark" src="../img/logo/jp-consulting-sombre-transparent.svg" width="230" height="59" alt="JP Consulting">
+      <p class="signature">LAB TSSR · 2026</p>
+    </div>
+    <div>
+      <h2>Me contacter</h2>
+      <ul>
+        <li><a href="mailto:jp.rebischung@protonmail.com">jp.rebischung@protonmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-philippe-rebischung/" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/jp-rebischung" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>À voir aussi</h2>
+      <ul>
+        <li><a href="../films.html">Les films du lab</a></li>
+        <li><a href="../documentation.html">Documentation du lab</a></li>
+        <li><a href="../docs/cv-jean-philippe-rebischung.pdf" download>CV (PDF)</a></li>
+        <li><a href="../docs/dossier-projet-infrastructure.pdf" download>Dossier du projet (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    Site statique écrit en HTML et CSS, hébergé sur GitHub Pages, sans cookie ni traceur ; polices hébergées sur le site.
+    Tux d'après le dessin original de Larry Ewing. Personnages Azur, Tux et Chester, animations et films créés par génération d'images et de vidéos.
+    JP Consulting est l'entreprise fictive de mon lab ; les noms des utilisateurs dans les tickets sont fictifs.
+  </div>
+</footer>
+<script src="../js/theme.js"></script>
+</body>
+</html>

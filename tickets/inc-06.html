@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INC-06 · Scripts et automatisation · Jean-Philippe Rebischung</title>
+<meta name="description" content="Ticket INC-06 (Scripts et automatisation) : Mesurer, faire décider le responsable par écrit, supprimer avec preuve : un script en lecture seule à l'appui.">
+<meta name="author" content="Jean-Philippe Rebischung">
+<meta property="og:title" content="INC-06 · Scripts et automatisation · Jean-Philippe Rebischung">
+<meta property="og:description" content="Ticket INC-06 (Scripts et automatisation) : Mesurer, faire décider le responsable par écrit, supprimer avec preuve : un script en lecture seule à l'appui.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../img/logo/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="../index.html">
+      <img src="../img/logo/favicon.svg" width="46" height="46" alt="">
+      <span><b>Jean-Philippe Rebischung</b><small>Technicien Supérieur Systèmes et Réseaux</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="../competences.html" aria-current="page">Compétences</a>
+      <a href="../projet.html">Projet</a>
+      <a href="../parcours.html">Parcours</a>
+      <a href="../films.html">Films</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-pressed="false">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      <span class="label">Clair</span>
+    </button>
+  </div>
+</header>
+<main id="contenu">
+<div class="appbar"><div class="wrap appbar-in"><span class="module">Assistance</span><span class="crumbs"><a href="../competences.html">Tickets</a> › INC-06</span></div></div>
+  <section class="wrap ticket-head">
+    <p class="eyebrow">BC02 · Scripts et automatisation</p>
+    <h1><span class="mono tid">INC-06</span> Alerte Zabbix : le volume du partage E: est presque plein</h1>
+    <div class="guide-line">
+      <img src="../img/personnages/azur-avatar.webp" width="96" height="96" alt="" class="av">
+      <p class="bubble side"><span class="who">Azur · administrateur Windows</span>Rien n'a été supprimé sans un accord écrit. Et comme la dernière sauvegarde datait d'avant les fichiers, cet accord était la seule garantie.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="tool ticket">
+      <div class="thread">
+        <article class="entry k-demande">
+          <header><span class="kind">Demande</span><b>Alerte de supervision</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Zabbix signale : « Windows FS [Partages(E:)]: Space is critically low (used&gt;90%, total 100.0GB) », hôte VM-WinSrv25-JP, apparue à 14h50.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Mesurer le volume</b><span class="by">Jean-Philippe</span><span class="dur">5 min</span></header>
+          <div class="entry-body"><p><code>Get-Volume -DriveLetter E</code> : 100 Go, <strong>8,8 Go libres</strong> (91,2 % occupés).</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Lire les quotas</b><span class="by">Jean-Philippe</span><span class="dur">5 min</span></header>
+          <div class="entry-body"><p><code>Get-FsrmQuota</code> : un seul quota, sur <code>E:\Informatique</code> (5 Go, rien d'utilisé). Il n'explique pas la saturation.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Trouver les gros fichiers</b><span class="by">Jean-Philippe</span><span class="dur">10 min</span></header>
+          <div class="entry-body"><p><code>Get-ChildItem E:\ -Recurse -File | Sort-Object Length -Descending | Select-Object -First 10</code> : 9 fichiers de 10 240 Mo, <code>export_1.bak</code> à <code>export_9.bak</code>, dans <code>E:\Temp_Migration</code>, tous créés à 14h45. Total : 92 160 Mo.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Exporter un rapport</b><span class="by">Jean-Philippe</span><span class="dur">20 min</span></header>
+          <div class="entry-body"><p>J'applique le script de rapport prévu dans mon runbook de stockage, en lecture seule (voir le script plus bas) : deux fichiers CSV horodatés, les plus gros fichiers et la taille de chaque dossier. Testé d'abord sur un petit dossier (15h21), puis lancé sur tout le volume (15h29). Ils gardent une preuve datée de l'état avant intervention.</p></div>
+        </article>
+        <article class="entry k-suivi right">
+          <header><span class="kind">Suivi</span><b>Message au responsable</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Le volume des partages est occupé à 91,2 % : il reste 8,8 Go. Les fichiers datent tous du même jour, je ne peux donc pas dire quand le volume sera plein. À 100 %, les partages deviendraient inutilisables : c'est pourquoi le ticket est en priorité Haute. Le dossier <code>E:\Temp_Migration</code> occupe 92 160 Mo. <strong>Je ne supprime rien sans ton accord.</strong> Peux-tu m'indiquer, pour chaque fichier : à garder, à archiver ailleurs ou à supprimer ?</p></div>
+        </article>
+        <article class="entry k-reponse">
+          <header><span class="kind">Réponse</span><b>Décision écrite</b><span class="by">Responsable informatique</span></header>
+          <div class="entry-body"><p><code>export_2.bak</code> à <code>export_9.bak</code> : à supprimer, ce sont des exports temporaires de migration. <code>export_1.bak</code> : à conserver jusqu'à vendredi pour une vérification. Rien d'autre ne doit être supprimé. Confirme-moi l'espace libéré et le retour à la normale de l'alerte.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Vérifier la sauvegarde</b><span class="by">Jean-Philippe</span><span class="dur">5 min</span></header>
+          <div class="entry-body"><p><code>wbadmin get versions</code> : la dernière sauvegarde date de 14h40, <strong>avant</strong> la création des fichiers (14h45). Aucune restauration possible : la suppression sera irréversible, l'accord écrit est la seule garantie.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Supprimer et prouver</b><span class="by">Jean-Philippe</span><span class="dur">15 min</span></header>
+          <div class="entry-body"><p>Simulation d'abord : <code>2..9 | ForEach-Object { Remove-Item -LiteralPath "E:\Temp_Migration\export_$_.bak" -WhatIf }</code> (export_2 à export_9 listés, export_1 écarté). Puis la suppression, et la preuve : <code>Get-ChildItem E:\Temp_Migration</code> ne montre plus qu'<code>export_1.bak</code> ; <code>Get-Volume</code> : <strong>88,8 Go libres</strong>.</p></div>
+        </article>
+        <article class="entry k-solution right">
+          <header><span class="kind">Solution</span><b>Solution approuvée · ticket clos</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p><strong>Cause :</strong> neuf fichiers d'export de migration de 10 Go chacun occupaient le volume des partages, à 91,2 %.</p><p><strong>Correction :</strong> avec l'accord écrit du responsable, suppression de <code>export_2.bak</code> à <code>export_9.bak</code> après une simulation <code>-WhatIf</code> ; <code>export_1.bak</code> conservé.</p><p><strong>Vérification :</strong> espace libre passé de 8,8 Go à 88,8 Go ; alerte Zabbix passée à Résolu.</p><p><strong>Recommandation :</strong> un quota FSRM sur ce dossier pour éviter la récidive (proposé, à valider par le responsable).</p></div>
+        </article>
+        <aside class="retenir"><b>À retenir</b><p>Mesurer avant d'agir, ne pas annoncer de date sans rythme mesuré, obtenir un accord écrit avant une suppression irréversible, et prouver le résultat par un avant / après.</p></aside>
+      </div>
+      <aside class="fields" aria-label="Champs du ticket">
+        <p class="fields-title">Ticket</p>
+        <dl>
+          <dt>Statut</dt><dd><span class="status">Clos</span></dd>
+          <dt>Type</dt><dd>Incident</dd>
+          <dt>Catégorie</dt><dd>Serveurs et services › Stockage et partages</dd>
+          <dt>Source</dt><dd>Supervision</dd>
+          <dt>Urgence</dt><dd>Haute</dd>
+          <dt>Impact</dt><dd>Haut</dd>
+          <dt>Priorité</dt><dd><span class="prio p-haute">Haute</span></dd>
+          <dt>Niveau</dt><dd><span class="lvl n2">N2</span></dd>
+          <dt>Durée totale</dt><dd class="mono">1 h</dd>
+        </dl>
+        <p class="fields-title">Acteurs</p>
+        <dl>
+          <dt>Demandeur</dt><dd>Jean-Philippe (technicien)</dd>
+          <dt>Attribué à</dt><dd>Jean-Philippe (technicien)</dd>
+          <dt>Observateur</dt><dd>Responsable informatique</dd>
+        </dl>
+        
+      </aside>
+    </div>
+
+    <section class="tool script" aria-labelledby="script">
+      <div class="tool-bar"><h2 id="script">Le script du runbook : <span class="mono">Rapport-Espace-Partage.ps1</span></h2><span class="tag-ro mono">lecture seule</span></div>
+      <pre class="code-block"><code># Rapport-Espace-Partage.ps1 - LECTURE SEULE : ne supprime rien
+# Exporte les plus gros fichiers et la taille des dossiers de premier niveau.
+param(
+    [string]$Racine = &#x27;E:\&#x27;,
+    [int]$Nombre = 30,
+    [string]$Sortie = &#x27;C:\Outils\Rapports&#x27;
+)
+# 1. Verifications
+if (-not (Test-Path -LiteralPath $Racine)) {
+    Write-Error &quot;Racine introuvable : $Racine&quot;
+    exit 1
+}
+New-Item -ItemType Directory -Path $Sortie -Force | Out-Null
+$h = Get-Date -Format &#x27;yyyyMMdd-HHmm&#x27;
+$ea = &#x27;SilentlyContinue&#x27;
+# 2. Traitement : les plus gros fichiers
+$fichiers = Get-ChildItem -LiteralPath $Racine -Recurse -File -ErrorAction $ea |
+    Sort-Object Length -Descending |
+    Select-Object -First $Nombre |
+    ForEach-Object {
+        [pscustomobject]@{
+            Chemin       = $_.FullName
+            TailleMo     = [math]::Round($_.Length / 1MB, 1)
+            Proprietaire = (Get-Acl -LiteralPath $_.FullName -ErrorAction $ea).Owner
+            Modifie      = $_.LastWriteTime
+            Cree         = $_.CreationTime
+        }
+    }
+# 3. Traitement : taille de chaque dossier de premier niveau
+$dossiers = Get-ChildItem -LiteralPath $Racine -Directory -ErrorAction $ea |
+    ForEach-Object {
+        $sous = Get-ChildItem -LiteralPath $_.FullName -Recurse -File -ErrorAction $ea
+        $somme = ($sous | Measure-Object Length -Sum).Sum
+        [pscustomobject]@{
+            Dossier  = $_.FullName
+            TailleMo = [math]::Round($somme / 1MB, 1)
+        }
+    } |
+    Sort-Object TailleMo -Descending
+# 4. Export et message de fin
+$f1 = Join-Path $Sortie &quot;gros-fichiers-$h.csv&quot;
+$f2 = Join-Path $Sortie &quot;tailles-dossiers-$h.csv&quot;
+$fichiers | Export-Csv -Path $f1 -NoTypeInformation -Encoding UTF8 -Delimiter &#x27;;&#x27;
+$dossiers | Export-Csv -Path $f2 -NoTypeInformation -Encoding UTF8 -Delimiter &#x27;;&#x27;
+Write-Output &quot;Rapports : $f1 et $f2&quot;
+</code></pre>
+      <div class="script-out">
+        <h3>Extrait du rapport produit (lancement sur tout le volume, 15h29)</h3>
+        <div class="table-scroll"><table class="data">
+          <thead><tr><th>Dossier</th><th>TailleMo</th></tr></thead>
+          <tbody><tr><td class="mono">E:\Temp_Migration</td><td class="mono">92160</td></tr><tr><td class="mono">E:\Commun</td><td class="mono">0</td></tr><tr><td class="mono">E:\Informatique</td><td class="mono">0</td></tr></tbody>
+        </table></div>
+        <div class="table-scroll"><table class="data">
+          <thead><tr><th>Chemin</th><th>TailleMo</th><th>Propriétaire</th><th>Créé</th></tr></thead>
+          <tbody><tr><td class="mono">E:\Temp_Migration\export_1.bak</td><td class="mono">10240</td><td class="mono">BUILTIN\Administrateurs</td><td class="mono">14:45:06</td></tr><tr><td class="mono">E:\Temp_Migration\export_2.bak</td><td class="mono">10240</td><td class="mono">BUILTIN\Administrateurs</td><td class="mono">14:45:06</td></tr><tr><td class="mono">E:\Temp_Migration\export_3.bak</td><td class="mono">10240</td><td class="mono">BUILTIN\Administrateurs</td><td class="mono">14:45:06</td></tr><tr><td class="mono" colspan="4">… export_4.bak à export_9.bak, même taille, même heure</td></tr></tbody>
+        </table></div>
+        <p class="small-note">Ce que je défends dans ce script : il annonce « lecture seule » dès la première ligne, il vérifie la racine avant d'agir, ses paramètres permettent de le tester sur un petit dossier, et ses rapports horodatés gardent une preuve de l'état avant intervention.</p>
+      </div>
+    </section>
+    <nav class="pager" aria-label="Tickets voisins"><a href="inc-05.html">← INC-05 · Infrastructure virtualisée</a><a href="../competences.html">Retour à la file</a><a href="inc-07.html">INC-07 · Accès Internet et interconnexions →</a></nav>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <div>
+      <img class="footer-logo logo-light" src="../img/logo/jp-consulting-clair.svg" width="230" height="59" alt="JP Consulting">
+      <img class="footer-logo logo-dark" src="../img/logo/jp-consulting-sombre-transparent.svg" width="230" height="59" alt="JP Consulting">
+      <p class="signature">LAB TSSR · 2026</p>
+    </div>
+    <div>
+      <h2>Me contacter</h2>
+      <ul>
+        <li><a href="mailto:jp.rebischung@protonmail.com">jp.rebischung@protonmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-philippe-rebischung/" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/jp-rebischung" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>À voir aussi</h2>
+      <ul>
+        <li><a href="../films.html">Les films du lab</a></li>
+        <li><a href="../documentation.html">Documentation du lab</a></li>
+        <li><a href="../docs/cv-jean-philippe-rebischung.pdf" download>CV (PDF)</a></li>
+        <li><a href="../docs/dossier-projet-infrastructure.pdf" download>Dossier du projet (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    Site statique écrit en HTML et CSS, hébergé sur GitHub Pages, sans cookie ni traceur ; polices hébergées sur le site.
+    Tux d'après le dessin original de Larry Ewing. Personnages Azur, Tux et Chester, animations et films créés par génération d'images et de vidéos.
+    JP Consulting est l'entreprise fictive de mon lab ; les noms des utilisateurs dans les tickets sont fictifs.
+  </div>
+</footer>
+<script src="../js/theme.js"></script>
+</body>
+</html>

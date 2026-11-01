@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INC-02 · Windows Server et Active Directory · Jean-Philippe Rebischung</title>
+<meta name="description" content="Ticket INC-02 (Windows Server et Active Directory) : Escalade N1 → N2 : un poste perd sa relation avec le domaine, réparée sans le sortir du domaine.">
+<meta name="author" content="Jean-Philippe Rebischung">
+<meta property="og:title" content="INC-02 · Windows Server et Active Directory · Jean-Philippe Rebischung">
+<meta property="og:description" content="Ticket INC-02 (Windows Server et Active Directory) : Escalade N1 → N2 : un poste perd sa relation avec le domaine, réparée sans le sortir du domaine.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../img/logo/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="../index.html">
+      <img src="../img/logo/favicon.svg" width="46" height="46" alt="">
+      <span><b>Jean-Philippe Rebischung</b><small>Technicien Supérieur Systèmes et Réseaux</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="../competences.html" aria-current="page">Compétences</a>
+      <a href="../projet.html">Projet</a>
+      <a href="../parcours.html">Parcours</a>
+      <a href="../films.html">Films</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-pressed="false">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      <span class="label">Clair</span>
+    </button>
+  </div>
+</header>
+<main id="contenu">
+<div class="appbar"><div class="wrap appbar-in"><span class="module">Assistance</span><span class="crumbs"><a href="../competences.html">Tickets</a> › INC-02</span></div></div>
+  <section class="wrap ticket-head">
+    <p class="eyebrow">BC01 · Windows Server et Active Directory</p>
+    <h1><span class="mono tid">INC-02</span> « La relation d'approbation entre cette station de travail et le domaine principal a échoué »</h1>
+    <div class="guide-line">
+      <img src="../img/personnages/azur-avatar.webp" width="96" height="96" alt="" class="av">
+      <p class="bubble side"><span class="who">Azur · administrateur Windows</span>Le N1 a fait les bons tests, puis il a transmis. Le N2 a réparé le canal sécurisé sur place, sans sortir le poste du domaine.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="tool ticket">
+      <div class="thread">
+        <article class="entry k-demande">
+          <header><span class="kind">Demande</span><b>Constat et premiers tests</b><span class="by">Phil · N1</span></header>
+          <div class="entry-body"><p>En me connectant avec un compte administrateur sur le poste <strong>VM-Win11Clt1-JP</strong> pour installer un logiciel, j'obtiens : « La relation d'approbation entre cette station de travail et le domaine principal a échoué. » Même message avec mon propre compte, alors que je me connecte normalement sur mon poste.</p><ul><li>Depuis mon poste, un <code>ping</code> vers le poste concerné : il répond, il est allumé et sur le réseau.</li><li>Un <code>ping</code> vers le contrôleur de domaine et un <code>ipconfig /all</code> : le domaine est joignable, tout répond normalement.</li></ul><p>Le problème est donc propre à ce poste, pas une panne générale. Je ne peux ouvrir aucune session dessus pour aller plus loin : <strong>je transmets le ticket au N2</strong>.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Reprise du ticket et diagnostic</b><span class="by">Jean-Philippe · N2</span></header>
+          <div class="entry-body"><p>Aucun compte de domaine ne peut ouvrir de session tant que la relation est cassée : je me connecte avec un <strong>compte administrateur local</strong>. <code>Test-ComputerSecureChannel</code> renvoie <code>False</code> : la relation d'approbation est bien rompue.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Réparation sur place</b><span class="by">Jean-Philippe · N2</span></header>
+          <div class="entry-body"><p><code>Test-ComputerSecureChannel -Repair -Credential (Get-Credential) -Verbose</code>, avec un compte habilité. La commande réussit. Nouveau test : <code>True</code>. Ouverture de session de domaine vérifiée avec un compte sans cache.</p><p>Cause probable : le poste, resté éteint longtemps, a laissé son secret machine se désynchroniser de celui du domaine.</p></div>
+        </article>
+        <article class="entry k-reponse">
+          <header><span class="kind">Réponse</span><b>Retour du N1</b><span class="by">Phil · N1</span></header>
+          <div class="entry-body"><p>Merci pour la prise en charge : tout fonctionne, j'ai pu reprendre l'installation du logiciel.</p></div>
+        </article>
+        <article class="entry k-solution right">
+          <header><span class="kind">Solution</span><b>Solution approuvée · ticket clos</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Relation d'approbation du poste VM-Win11Clt1-JP réparée en place avec <code>Test-ComputerSecureChannel -Repair</code>, <strong>sans sortir le poste du domaine</strong>. Canal re-testé : <code>True</code>. Ouverture de session de domaine vérifiée. Poste de nouveau opérationnel. Solution approuvée par le N1.</p></div>
+        </article>
+        <aside class="retenir"><b>À retenir</b><p>Une escalade utile, c'est un ticket où le N2 n'a rien à redemander : le N1 a écrit ce qu'il a testé et ce qu'il en a conclu.</p></aside>
+      </div>
+      <aside class="fields" aria-label="Champs du ticket">
+        <p class="fields-title">Ticket</p>
+        <dl>
+          <dt>Statut</dt><dd><span class="status">Clos</span></dd>
+          <dt>Type</dt><dd>Incident</dd>
+          <dt>Catégorie</dt><dd>Serveurs et services › Annuaire et GPO</dd>
+          <dt>Source</dt><dd>Helpdesk</dd>
+          <dt>Urgence</dt><dd>Haute</dd>
+          <dt>Impact</dt><dd>Haut</dd>
+          <dt>Priorité</dt><dd><span class="prio p-haute">Haute</span></dd>
+          <dt>Niveau</dt><dd><span class="lvl n2">N1 → N2</span></dd>
+          <dt>Durée totale</dt><dd class="mono">23 min</dd>
+        </dl>
+        <p class="fields-title">Acteurs</p>
+        <dl>
+          <dt>Demandeur</dt><dd>Phil (technicien N1)</dd>
+          <dt>Attribué à</dt><dd>Jean-Philippe (technicien N2)</dd>
+          
+        </dl>
+        
+      </aside>
+    </div>
+
+    <nav class="pager" aria-label="Tickets voisins"><a href="inc-01.html">← INC-01 · Support utilisateur</a><a href="../competences.html">Retour à la file</a><a href="inc-03.html">INC-03 · Serveurs Linux →</a></nav>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <div>
+      <img class="footer-logo logo-light" src="../img/logo/jp-consulting-clair.svg" width="230" height="59" alt="JP Consulting">
+      <img class="footer-logo logo-dark" src="../img/logo/jp-consulting-sombre-transparent.svg" width="230" height="59" alt="JP Consulting">
+      <p class="signature">LAB TSSR · 2026</p>
+    </div>
+    <div>
+      <h2>Me contacter</h2>
+      <ul>
+        <li><a href="mailto:jp.rebischung@protonmail.com">jp.rebischung@protonmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-philippe-rebischung/" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/jp-rebischung" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>À voir aussi</h2>
+      <ul>
+        <li><a href="../films.html">Les films du lab</a></li>
+        <li><a href="../documentation.html">Documentation du lab</a></li>
+        <li><a href="../docs/cv-jean-philippe-rebischung.pdf" download>CV (PDF)</a></li>
+        <li><a href="../docs/dossier-projet-infrastructure.pdf" download>Dossier du projet (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    Site statique écrit en HTML et CSS, hébergé sur GitHub Pages, sans cookie ni traceur ; polices hébergées sur le site.
+    Tux d'après le dessin original de Larry Ewing. Personnages Azur, Tux et Chester, animations et films créés par génération d'images et de vidéos.
+    JP Consulting est l'entreprise fictive de mon lab ; les noms des utilisateurs dans les tickets sont fictifs.
+  </div>
+</footer>
+<script src="../js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projet · Jean-Philippe Rebischung</title>
+<meta name="description" content="Mon projet d'infrastructure d'entreprise : deux sites, deux domaines d'identité, pare-feux, VPN, journaux, supervision et sauvegardes.">
+<meta name="author" content="Jean-Philippe Rebischung">
+<meta property="og:title" content="Projet · Jean-Philippe Rebischung">
+<meta property="og:description" content="Mon projet d'infrastructure d'entreprise : deux sites, deux domaines d'identité, pare-feux, VPN, journaux, supervision et sauvegardes.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="img/logo/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="index.html">
+      <img src="img/logo/favicon.svg" width="46" height="46" alt="">
+      <span><b>Jean-Philippe Rebischung</b><small>Technicien Supérieur Systèmes et Réseaux</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="competences.html">Compétences</a>
+      <a href="projet.html" aria-current="page">Projet</a>
+      <a href="parcours.html">Parcours</a>
+      <a href="films.html">Films</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-pressed="false">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      <span class="label">Clair</span>
+    </button>
+  </div>
+</header>
+<main id="contenu">
+<div class="appbar"><div class="wrap appbar-in"><span class="module">Inventaire</span><span class="crumbs">Parc</span></div></div>
+  <section class="wrap page-intro">
+    <div>
+      <p class="eyebrow">Inventaire · le parc du lab</p>
+      <h1>Une infrastructure d'entreprise sur deux sites</h1>
+      <p class="lead">Mon projet de formation m'a donné des bases solides : un domaine Windows, ses postes clients, un pare-feu, la supervision, les sauvegardes et restaurations, et la gestion des tickets. Sur ces fondations, j'ai construit un lab d'entreprise déjà étoffé, que je fais évoluer en continu pour le rapprocher au plus près de ce qu'on trouve en entreprise : un domaine Linux, un second site relié par un tunnel chiffré, des journaux centralisés et une détection d'intrusion.</p>
+      <p class="lead">Chaque chantier indique s'il relève du titre TSSR ou s'il va au-delà, et mon niveau réel : <strong>pratiqué</strong>, c'est-à-dire installé, testé, cassé, réparé et documenté dans un lab.</p>
+    </div>
+    <figure class="guide">
+        <p class="bubble"><span class="who">Tux · Linux</span>Bienvenue dans le parc ! Deux sites, deux domaines, deux pare-feux, et un tunnel orange entre les deux.</p>
+        <img src="img/personnages/tux-portable.webp" width="580" height="812" alt="Tux, le manchot de Linux, en chemise, cravate orange et gilet, travaille sur son ordinateur portable.">
+      </figure>
+  </section>
+
+  <section class="wrap">
+    <figure class="tool schema-big">
+      <div class="tool-bar"><h2>Carte du lab</h2><span class="mono small">2 sites · 4 réseaux · 1 tunnel IPsec</span></div>
+      <img src="img/schemas/carte-du-lab.webp" width="1600" height="1311" alt="Carte du lab : site A sous VMware (pfSense-1, GLPI, Zabbix, collecteur VM-syslog-JP, postes Windows 11, contrôleur Active Directory, WSUS, autorité de certification), site B sous Proxmox (pfSense-2, FreeIPA, clients Mint, Oracle et Ubuntu), reliés par un tunnel IPsec ; un accès distant OpenVPN et un poste d'audit externe.">
+      <figcaption>Deux sites reliés par un tunnel IPsec, un accès distant et un poste externe.</figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap section" aria-labelledby="parc">
+    <div class="section-head"><h2 id="parc">Les chantiers</h2><p>Ouvrez une ligne pour le détail.</p></div>
+    <div class="tool">
+      <div class="asset-head" aria-hidden="true"><span>N°</span><span>Élément · composants</span><span>Périmètre</span><span>Niveau</span><span>État</span></div>
+      <details class="asset">
+        <summary>
+          <span class="a-id mono">01</span>
+          <span class="a-name"><b>Socle : virtualisation, adressage, pare-feu</b><small>VMware Workstation · Proxmox VE · pfSense ×2</small></span>
+          <span class="a-perim"><span class="perim titre">Titre TSSR</span></span>
+          <span class="a-lvl"><span class="niv">Pratiqué</span></span>
+          <span class="a-st"><span class="dot" aria-hidden="true"></span>En service</span>
+        </summary>
+        <div class="asset-body"><p>Deux sites : mon PC de bureau sous <strong>VMware Workstation</strong> (hyperviseur de type 2) et un ordinateur de 2014 recyclé sous <strong>Proxmox VE</strong> (type 1). Quatre réseaux, chacun derrière un pare-feu <strong>pfSense</strong>.</p><p>Ma méthode de filtrage : tout ce qui n'est pas explicitement autorisé est bloqué, et les règles s'écrivent à partir des flux observés dans le journal du pare-feu.</p></div>
+      </details>
+      <details class="asset">
+        <summary>
+          <span class="a-id mono">02</span>
+          <span class="a-name"><b>Postes et serveurs Linux</b><small>Linux Mint · Kali Linux · Oracle Linux · Ubuntu</small></span>
+          <span class="a-perim"><span class="perim titre">Titre TSSR</span></span>
+          <span class="a-lvl"><span class="niv">Pratiqué</span></span>
+          <span class="a-st"><span class="dot" aria-hidden="true"></span>En service</span>
+        </summary>
+        <div class="asset-body"><p>Les distributions vues en formation, toutes présentes dans le lab : <strong>Linux Mint</strong> et <strong>Ubuntu</strong> comme postes, <strong>Oracle Linux</strong> comme serveur, et <strong>Kali Linux</strong> sur deux postes d'audit, l'un à l'intérieur du réseau, l'autre à l'extérieur, pour vérifier que les défenses tiennent.</p></div>
+      </details>
+      <details class="asset">
+        <summary>
+          <span class="a-id mono">03</span>
+          <span class="a-name"><b>Domaine Windows et rôles d'entreprise</b><small>AD DS · DNS · DHCP · GPO · DFS · FSRM · WSUS · LAPS · AD CS</small></span>
+          <span class="a-perim"><span class="perim titre">Titre TSSR</span></span>
+          <span class="a-lvl"><span class="niv">Pratiqué</span></span>
+          <span class="a-st"><span class="dot" aria-hidden="true"></span>En service</span>
+        </summary>
+        <div class="asset-body"><p>Active Directory sur Windows Server 2025 : unités d'organisation, groupes selon le modèle AGDLP, sept GPO. Partages NTFS avec énumération basée sur l'accès, espace de noms DFS, quotas FSRM, WSUS en HTTPS, LAPS, serveur d'impression, et une autorité de certification interne qui délivre les certificats HTTPS des interfaces d'administration.</p></div>
+      </details>
+      <details class="asset">
+        <summary>
+          <span class="a-id mono">04</span>
+          <span class="a-name"><b>Supervision, inventaire, tickets et sauvegardes</b><small>Nagios XI · GLPI · Windows Server Backup · vzdump</small></span>
+          <span class="a-perim"><span class="perim titre">Titre TSSR</span></span>
+          <span class="a-lvl"><span class="niv">Pratiqué</span></span>
+          <span class="a-st"><span class="dot" aria-hidden="true"></span>En service</span>
+        </summary>
+        <div class="asset-body"><p><strong>Nagios XI</strong> pour la supervision, <strong>GLPI</strong> pour l'inventaire par agent et les tickets (ceux de la page Compétences).</p><p>Sauvegardes testées : Windows Server Backup pour le contrôleur de domaine, export chiffré de la configuration des pare-feux, vzdump sur Proxmox, instantané avant toute action importante.</p></div>
+      </details>
+      <details class="asset">
+        <summary>
+          <span class="a-id mono">05</span>
+          <span class="a-name"><b>FreeIPA : un domaine d'identité pour le parc Linux</b><small>FreeIPA · AlmaLinux</small></span>
+          <span class="a-perim"><span class="perim beyond">Au-delà du titre</span></span>
+          <span class="a-lvl"><span class="niv">Pratiqué</span></span>
+          <span class="a-st"><span class="dot" aria-hidden="true"></span>En service</span>
+        </summary>
+        <div class="asset-body"><p><strong>FreeIPA</strong> sur AlmaLinux : LDAP, Kerberos, DNS, sudo par rôle. Les postes et serveurs Linux sont joints au domaine : un seul compte, une seule politique, au lieu de comptes locaux qui divergent.</p></div>
+      </details>
+      <details class="asset">
+        <summary>
+          <span class="a-id mono">06</span>
+          <span class="a-name"><b>Deux sites, un VPN IPsec et le trust AD ↔ FreeIPA</b><small>IPsec IKEv2 · OpenVPN · approbation de forêt</small></span>
+          <span class="a-perim"><span class="perim beyond">Au-delà du titre</span></span>
+          <span class="a-lvl"><span class="niv">Pratiqué</span></span>
+          <span class="a-st"><span class="dot" aria-hidden="true"></span>En service</span>
+        </summary>
+        <div class="asset-body"><p>Un tunnel <strong>IPsec IKEv2</strong> relie les deux sites ; un accès distant <strong>OpenVPN</strong> (un certificat par appareil) est limité au PC hôte. Les deux domaines sont reliés par une <strong>approbation unidirectionnelle</strong> : FreeIPA fait confiance à Active Directory. C'est le chantier central du lab, détaillé plus bas.</p></div>
+      </details>
+      <details class="asset">
+        <summary>
+          <span class="a-id mono">07</span>
+          <span class="a-name"><b>Supervision et automatisation</b><small>Zabbix (Rocky Linux) · Ansible</small></span>
+          <span class="a-perim"><span class="perim beyond">Au-delà du titre</span></span>
+          <span class="a-lvl"><span class="niv">Pratiqué</span></span>
+          <span class="a-st"><span class="dot" aria-hidden="true"></span>En service</span>
+        </summary>
+        <div class="asset-body"><p>J'ai choisi <strong>Zabbix</strong> parce qu'il revient souvent dans les offres d'emploi : agents, SNMP pour les pare-feux, API Proxmox en lecture seule. <strong>Ansible</strong> automatise le durcissement SSH, l'environnement shell et le déploiement des clés, avec une idempotence vérifiée en simulation.</p></div>
+      </details>
+      <details class="asset">
+        <summary>
+          <span class="a-id mono">08</span>
+          <span class="a-name"><b>Journaux centralisés et détection d'intrusion</b><small>rsyslog (Debian) · RELP/TLS · NXLog · Sysmon · Suricata</small></span>
+          <span class="a-perim"><span class="perim beyond">Au-delà du titre</span></span>
+          <span class="a-lvl"><span class="niv">Pratiqué</span></span>
+          <span class="a-st"><span class="dot" aria-hidden="true"></span>En service</span>
+        </summary>
+        <div class="asset-body"><p>Un collecteur <strong>rsyslog</strong> (VM-syslog-JP, sous Debian) reçoit 12 sources par trois canaux : RELP avec TLS mutuel pour les machines Linux, syslog en TLS via NXLog et Sysmon pour les serveurs Windows, syslog UDP pour les pare-feux. Il conserve et classe les journaux de toutes les machines. <strong>Suricata</strong> surveille le trafic sur les deux pare-feux.</p><figure class="schema"><img src="img/schemas/canaux-journaux-collecteur.webp" width="1600" height="656" alt="Les trois canaux d'envoi des journaux vers le collecteur VM-syslog-JP : RELP et TLS mutuel pour 7 machines Linux, syslog TLS pour 3 serveurs Windows, syslog UDP pour 2 pare-feux pfSense." loading="lazy"><figcaption>Les trois canaux d'envoi des journaux vers le collecteur.</figcaption></figure></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="trust">
+    <div class="section-head"><h2 id="trust">Le chantier central : faire reconnaître un compte Windows sur Linux</h2></div>
+    <div class="case">
+      <figure class="schema case-fig"><img src="img/schemas/approbation-ad-freeipa.webp" width="1600" height="603" alt="L'approbation entre les deux domaines : FreeIPA, avec ses clients Mint, Oracle et Ubuntu, fait confiance à Active Directory." loading="lazy"><figcaption>L'approbation est unidirectionnelle : FreeIPA fait confiance à Active Directory.</figcaption></figure>
+      <div class="case-cols">
+        <div class="case-text">
+        <p>Une personne ne doit avoir qu'un seul compte, celui d'Active Directory, et pouvoir pourtant ouvrir une session sur une machine Linux gérée par FreeIPA. Pour cela, j'ai relié les deux domaines par une approbation à sens unique, le <strong>trust cross-realm</strong>.</p>
+        <h3>Quatre obstacles, dans l'ordre</h3>
+        <ul>
+          <li><strong>Le DNS</strong>, trois causes empilées : pas de zone de redirection, une zone non relue, puis la validation DNSSEC qui rejetait mon domaine interne. Chaque correction changeait le message d'erreur : un progrès de message est un progrès de diagnostic.</li>
+          <li><strong>L'horloge</strong> : 24 secondes d'écart, sous le seuil de Kerberos, mais sur une valeur qui dérive. Le contrôleur se synchronise désormais sur une source externe.</li>
+          <li><strong>La casse du nom d'hôte</strong> : le DNS l'ignore, Kerberos non.</li>
+          <li><strong>Un flux à deux extrémités</strong> : j'avais vérifié ce que FreeIPA écoutait, pas ce qu'il devait appeler (le catalogue global, port 3268).</li>
+        </ul>
+        </div>
+        <div class="case-text">
+        <h3>La preuve par l'usage</h3>
+        <p>Un compte Windows a le même identifiant Unix sur toutes les machines, obtient un ticket Kerberos délivré par le contrôleur Windows, et ouvre une session SSH sur un serveur Linux, avec la politique de mots de passe d'Active Directory. Le trust a survécu au remplacement du contrôleur de domaine et à la restauration de son état système.</p>
+        <p class="cta"><a class="btn btn-ghost" href="films.html">Voir le film « La relation de confiance »</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section band" aria-label="Le lab">
+    <div class="note">
+      <h3>Ce que le lab m'apporte</h3>
+      <p>Un environnement complet sur machines virtuelles, construit pour reproduire les situations du métier : pannes, migrations, restaurations, sécurité. Il me permet d'arriver en entreprise avec des réflexes déjà pratiqués.</p>
+    </div>
+    <div class="note">
+      <h3>Comment j'ai construit le lab</h3>
+      <p>Construire ce lab m'a demandé d'aller bien au-delà de ce que m'avait appris ma formation. Je l'ai fait avec une IA, utilisée comme formatrice : elle m'a appris à concevoir chaque chantier, à comprendre avant d'agir, et à chercher la cause d'une panne plutôt qu'un contournement. J'ai tout mis en pratique moi-même : installer, tester, casser, réparer, documenter. Chaque technologie du lab, je l'ai pratiquée, et chacune m'a fait progresser.</p>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-label="Pour aller plus loin">
+    <div class="note more">
+      <h3>Pour aller plus loin</h3>
+      <p>Le dossier de présentation détaille chaque chantier et les choix techniques ; la base de connaissances rassemble la documentation du lab.</p>
+      <p class="cta"><a class="btn btn-primary" href="documentation.html">Consulter la documentation</a><a class="btn btn-ghost" href="docs/dossier-projet-infrastructure.pdf" download>Dossier (PDF)</a></p>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <div>
+      <img class="footer-logo logo-light" src="img/logo/jp-consulting-clair.svg" width="230" height="59" alt="JP Consulting">
+      <img class="footer-logo logo-dark" src="img/logo/jp-consulting-sombre-transparent.svg" width="230" height="59" alt="JP Consulting">
+      <p class="signature">LAB TSSR · 2026</p>
+    </div>
+    <div>
+      <h2>Me contacter</h2>
+      <ul>
+        <li><a href="mailto:jp.rebischung@protonmail.com">jp.rebischung@protonmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-philippe-rebischung/" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/jp-rebischung" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>À voir aussi</h2>
+      <ul>
+        <li><a href="films.html">Les films du lab</a></li>
+        <li><a href="documentation.html">Documentation du lab</a></li>
+        <li><a href="docs/cv-jean-philippe-rebischung.pdf" download>CV (PDF)</a></li>
+        <li><a href="docs/dossier-projet-infrastructure.pdf" download>Dossier du projet (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    Site statique écrit en HTML et CSS, hébergé sur GitHub Pages, sans cookie ni traceur ; polices hébergées sur le site.
+    Tux d'après le dessin original de Larry Ewing. Personnages Azur, Tux et Chester, animations et films créés par génération d'images et de vidéos.
+    JP Consulting est l'entreprise fictive de mon lab ; les noms des utilisateurs dans les tickets sont fictifs.
+  </div>
+</footer>
+<script src="js/theme.js"></script>
+</body>
+</html>

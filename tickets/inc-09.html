@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INC-09 · Déploiement des postes · Jean-Philippe Rebischung</title>
+<meta name="description" content="Ticket INC-09 (Déploiement des postes) : Mettre en place WSUS, approuver, piloter sur un poste, lever un nettoyage en attente.">
+<meta name="author" content="Jean-Philippe Rebischung">
+<meta property="og:title" content="INC-09 · Déploiement des postes · Jean-Philippe Rebischung">
+<meta property="og:description" content="Ticket INC-09 (Déploiement des postes) : Mettre en place WSUS, approuver, piloter sur un poste, lever un nettoyage en attente.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../img/logo/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="../index.html">
+      <img src="../img/logo/favicon.svg" width="46" height="46" alt="">
+      <span><b>Jean-Philippe Rebischung</b><small>Technicien Supérieur Systèmes et Réseaux</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="../competences.html" aria-current="page">Compétences</a>
+      <a href="../projet.html">Projet</a>
+      <a href="../parcours.html">Parcours</a>
+      <a href="../films.html">Films</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-pressed="false">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      <span class="label">Clair</span>
+    </button>
+  </div>
+</header>
+<main id="contenu">
+<div class="appbar"><div class="wrap appbar-in"><span class="module">Assistance</span><span class="crumbs"><a href="../competences.html">Tickets</a> › INC-09</span></div></div>
+  <section class="wrap ticket-head">
+    <p class="eyebrow">BC02 · Déploiement des postes</p>
+    <h1><span class="mono tid">INC-09</span> WSUS : parc hors support, mise à niveau qui échoue puis réussit</h1>
+    <div class="guide-line">
+      <img src="../img/personnages/azur-avatar.webp" width="96" height="96" alt="" class="av">
+      <p class="bubble side"><span class="who">Azur · administrateur Windows</span>WSUS ne pousse rien : l'administrateur approuve, le poste vient chercher. Et on commence toujours par un seul poste, avec un retour arrière prêt.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="tool ticket">
+      <div class="thread">
+        <article class="entry k-demande">
+          <header><span class="kind">Demande</span><b>Besoin</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p>Mes postes Windows 11 n'ont reçu aucune mise à jour depuis des mois, volontairement, pour servir d'exercice. Je veux distribuer les mises à jour depuis un serveur interne, en gardant la main sur ce qui s'installe et quand. En vérifiant un poste : Windows 11 <strong>23H2, hors support</strong>. La mise à niveau vers 25H2 échoue au premier essai.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Installer WSUS</b><span class="by">Jean-Philippe</span><span class="dur">45 min</span></header>
+          <div class="entry-body"><p>Sur un serveur membre, avec un disque de données dédié. Catalogue réduit : deux produits, quelques classifications, une seule langue.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Ciblage côté client</b><span class="by">Jean-Philippe</span><span class="dur">40 min</span></header>
+          <div class="entry-body"><p>Une GPO range chaque machine dans son groupe WSUS. Les <strong>serveurs</strong> téléchargent mais n'installent que sur ma décision, pour ne pas imposer de redémarrage à un contrôleur de domaine. Les <strong>postes</strong> installent tous les jours à midi.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Approuver la mise à niveau</b><span class="by">Jean-Philippe</span><span class="dur">15 min</span></header>
+          <div class="entry-body"><p>Classification « mises à niveau » ajoutée ; version 25H2 approuvée pour le seul groupe des postes.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Piloter sur un poste</b><span class="by">Jean-Philippe</span><span class="dur">40 min</span></header>
+          <div class="entry-body"><p>Instantané d'abord, puis mise à niveau pilotée sur un seul poste.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Analyser l'échec</b><span class="by">Jean-Philippe</span><span class="dur">25 min</span></header>
+          <div class="entry-body"><p>L'erreur correspond à un <strong>nettoyage en attente</strong>, laissé par une tentative interrompue.</p></div>
+        </article>
+        <article class="entry k-tache right">
+          <header><span class="kind">Tâche</span><b>Relancer</b><span class="by">Jean-Philippe</span><span class="dur">40 min</span></header>
+          <div class="entry-body"><p>Réinitialisation des composants Windows Update, suppression du dossier de la tentative précédente, nouvelle mise à niveau.</p></div>
+        </article>
+        <article class="entry k-solution right">
+          <header><span class="kind">Solution</span><b>Solution approuvée · ticket clos</b><span class="by">Jean-Philippe</span></header>
+          <div class="entry-body"><p><strong>Cause de l'échec :</strong> un nettoyage en attente, laissé par une tentative interrompue.</p><p><strong>Réalisé :</strong> WSUS en place, groupes serveurs et postes ciblés par GPO, 25H2 approuvée pour les postes seulement ; poste pilote débloqué et mis à niveau.</p><p><strong>Vérification :</strong> poste pilote passé de 23H2 à 25H2 par le serveur interne, vérifié avec <code>winver</code>. Les autres postes suivront sur le même mode.</p></div>
+        </article>
+        <aside class="retenir"><b>À retenir</b><p>WSUS ne pousse rien : l'administrateur approuve, le client vient chercher. On commence par un poste pilote, avec un retour arrière prêt.</p></aside>
+      </div>
+      <aside class="fields" aria-label="Champs du ticket">
+        <p class="fields-title">Ticket</p>
+        <dl>
+          <dt>Statut</dt><dd><span class="status">Clos</span></dd>
+          <dt>Type</dt><dd>Demande</dd>
+          <dt>Catégorie</dt><dd>Serveurs et services › Mises à jour</dd>
+          <dt>Source</dt><dd>Constat technicien</dd>
+          <dt>Urgence</dt><dd>Moyenne</dd>
+          <dt>Impact</dt><dd>Moyen</dd>
+          <dt>Priorité</dt><dd><span class="prio p-moyenne">Moyenne</span></dd>
+          <dt>Niveau</dt><dd><span class="lvl n2">N2</span></dd>
+          <dt>Durée totale</dt><dd class="mono">3 h 25</dd>
+        </dl>
+        <p class="fields-title">Acteurs</p>
+        <dl>
+          <dt>Demandeur</dt><dd>Jean-Philippe</dd>
+          <dt>Attribué à</dt><dd>Jean-Philippe</dd>
+          
+        </dl>
+        <p class="star-note">Incident rencontré pendant la construction du lab, saisi ensuite dans l'outil de tickets.</p>
+      </aside>
+    </div>
+
+    <nav class="pager" aria-label="Tickets voisins"><a href="inc-08.html">← INC-08 · Sauvegardes et restaurations</a><a href="../competences.html">Retour à la file</a><span></span></nav>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <div>
+      <img class="footer-logo logo-light" src="../img/logo/jp-consulting-clair.svg" width="230" height="59" alt="JP Consulting">
+      <img class="footer-logo logo-dark" src="../img/logo/jp-consulting-sombre-transparent.svg" width="230" height="59" alt="JP Consulting">
+      <p class="signature">LAB TSSR · 2026</p>
+    </div>
+    <div>
+      <h2>Me contacter</h2>
+      <ul>
+        <li><a href="mailto:jp.rebischung@protonmail.com">jp.rebischung@protonmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jean-philippe-rebischung/" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/jp-rebischung" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>À voir aussi</h2>
+      <ul>
+        <li><a href="../films.html">Les films du lab</a></li>
+        <li><a href="../documentation.html">Documentation du lab</a></li>
+        <li><a href="../docs/cv-jean-philippe-rebischung.pdf" download>CV (PDF)</a></li>
+        <li><a href="../docs/dossier-projet-infrastructure.pdf" download>Dossier du projet (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap credits">
+    Site statique écrit en HTML et CSS, hébergé sur GitHub Pages, sans cookie ni traceur ; polices hébergées sur le site.
+    Tux d'après le dessin original de Larry Ewing. Personnages Azur, Tux et Chester, animations et films créés par génération d'images et de vidéos.
+    JP Consulting est l'entreprise fictive de mon lab ; les noms des utilisateurs dans les tickets sont fictifs.
+  </div>
+</footer>
+<script src="../js/theme.js"></script>
+</body>
+</html>
