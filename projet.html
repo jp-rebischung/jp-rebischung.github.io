@@ -12,7 +12,7 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Jean-Philippe Rebischung">
 <meta property="og:url" content="https://jp-rebischung.fr/projet.html">
-<meta property="og:image" content="https://jp-rebischung.fr/img/apercu-partage.jpg">
+<meta property="og:image" content="https://jp-rebischung.fr/img/apercu-partage-tssr.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Jean-Philippe Rebischung, Technicien Supérieur Systèmes et Réseaux : support N2, administration, lab d'entreprise.">
@@ -72,7 +72,7 @@
     <div class="section-head"><h2 id="parc">Les chantiers</h2><p>Ouvrez une ligne pour le détail.</p></div>
     <div class="tool">
       <div class="asset-head" aria-hidden="true"><span>N°</span><span>Élément · composants</span><span>Périmètre</span><span>Niveau</span><span>État</span></div>
-      <details class="asset">
+      <details class="asset" id="ch-01">
         <summary>
           <span class="a-id mono">01</span>
           <span class="a-name"><b>Socle : virtualisation, adressage, pare-feu</b><small>VMware Workstation · Proxmox VE · pfSense ×2</small></span>
@@ -82,7 +82,7 @@
         </summary>
         <div class="asset-body"><p>Deux sites : mon PC de bureau sous <strong>VMware Workstation</strong> (hyperviseur de type 2) et un ordinateur de 2014 recyclé sous <strong>Proxmox VE</strong> (type 1). Quatre réseaux privés, protégés par deux pare-feu <strong>pfSense</strong>, un par site.</p><p>Ma méthode de filtrage : tout ce qui n'est pas explicitement autorisé est bloqué, et les règles s'écrivent à partir des flux observés dans le journal du pare-feu.</p></div>
       </details>
-      <details class="asset">
+      <details class="asset" id="ch-02">
         <summary>
           <span class="a-id mono">02</span>
           <span class="a-name"><b>Postes et serveurs Linux</b><small>Linux Mint · Kali Linux · Oracle Linux · Ubuntu</small></span>
@@ -92,7 +92,7 @@
         </summary>
         <div class="asset-body"><p>Les distributions vues en formation, toutes présentes dans le lab : <strong>Linux Mint</strong> et <strong>Ubuntu</strong> comme postes, <strong>Oracle Linux</strong> comme serveur, et <strong>Kali Linux</strong> sur deux postes d'audit, l'un à l'intérieur du réseau, l'autre à l'extérieur, pour vérifier que les défenses tiennent.</p></div>
       </details>
-      <details class="asset">
+      <details class="asset" id="ch-03">
         <summary>
           <span class="a-id mono">03</span>
           <span class="a-name"><b>Domaine Windows et rôles d'entreprise</b><small>AD DS · DNS · DHCP · GPO · DFS · FSRM · WSUS · LAPS · AD CS</small></span>
@@ -102,7 +102,7 @@
         </summary>
         <div class="asset-body"><p>Active Directory sur Windows Server 2025 : unités d'organisation, groupes selon le modèle AGDLP, sept GPO. Partages NTFS avec énumération basée sur l'accès, espace de noms DFS, quotas FSRM, WSUS en HTTPS, LAPS, serveur d'impression, et une autorité de certification interne qui délivre les certificats HTTPS des interfaces d'administration.</p></div>
       </details>
-      <details class="asset">
+      <details class="asset" id="ch-04">
         <summary>
           <span class="a-id mono">04</span>
           <span class="a-name"><b>Supervision, inventaire, tickets et sauvegardes</b><small>Nagios XI · GLPI · Windows Server Backup · vzdump</small></span>
@@ -112,7 +112,7 @@
         </summary>
         <div class="asset-body"><p><strong>Nagios XI</strong> est l'outil vu en formation ; il supervise aujourd'hui mon PC hôte, à la demande. La supervision du lab au quotidien est assurée par <strong>Zabbix</strong> (chantier 07). <strong>GLPI</strong> sert à l'inventaire par agent et aux tickets (ceux de la page Compétences).</p><p>Sauvegardes testées : Windows Server Backup pour le contrôleur de domaine, export chiffré de la configuration des pare-feux, vzdump sur Proxmox, instantané avant toute action importante.</p></div>
       </details>
-      <details class="asset">
+      <details class="asset" id="ch-05">
         <summary>
           <span class="a-id mono">05</span>
           <span class="a-name"><b>FreeIPA : un domaine d'identité pour le parc Linux</b><small>FreeIPA · AlmaLinux</small></span>
@@ -122,7 +122,7 @@
         </summary>
         <div class="asset-body"><p><strong>FreeIPA</strong> sur AlmaLinux : LDAP, Kerberos, DNS, sudo par rôle. Les postes et serveurs Linux sont joints au domaine : un seul compte, une seule politique, au lieu de comptes locaux qui divergent.</p></div>
       </details>
-      <details class="asset">
+      <details class="asset" id="ch-06">
         <summary>
           <span class="a-id mono">06</span>
           <span class="a-name"><b>Deux sites, un VPN IPsec et le trust AD ↔ FreeIPA</b><small>IPsec IKEv2 · OpenVPN · approbation de forêt</small></span>
@@ -132,7 +132,7 @@
         </summary>
         <div class="asset-body"><p>Un tunnel <strong>IPsec IKEv2</strong> relie les deux sites ; un accès distant <strong>OpenVPN</strong> (un certificat par appareil) est limité au PC hôte. Les deux domaines sont reliés par une <strong>approbation unidirectionnelle</strong> : FreeIPA fait confiance à Active Directory. C'est le chantier central du lab, détaillé plus bas.</p></div>
       </details>
-      <details class="asset">
+      <details class="asset" id="ch-07">
         <summary>
           <span class="a-id mono">07</span>
           <span class="a-name"><b>Supervision et automatisation</b><small>Zabbix (Rocky Linux) · Ansible</small></span>
@@ -142,7 +142,7 @@
         </summary>
         <div class="asset-body"><p>J'ai choisi <strong>Zabbix</strong> parce qu'il revient souvent dans les offres d'emploi : agents, SNMP pour les pare-feux, API Proxmox en lecture seule. <strong>Ansible</strong> automatise le durcissement SSH, l'environnement shell et le déploiement des clés, avec une idempotence vérifiée en simulation.</p></div>
       </details>
-      <details class="asset">
+      <details class="asset" id="ch-08">
         <summary>
           <span class="a-id mono">08</span>
           <span class="a-name"><b>Journaux centralisés et détection d'intrusion</b><small>rsyslog (Debian) · RELP/TLS · NXLog · Sysmon · Suricata</small></span>
@@ -230,5 +230,6 @@
   </div>
 </footer>
 <script src="js/theme.js"></script>
+<script src="js/ancre.js"></script>
 </body>
 </html>

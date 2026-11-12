@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Jean-Philippe Rebischung · Technicien Supérieur Systèmes et Réseaux</title>
+<title>Technicien Supérieur Systèmes et Réseaux · Jean-Philippe Rebischung</title>
 <meta name="description" content="CV et lab de Jean-Philippe Rebischung, Technicien Supérieur Systèmes et Réseaux : le métier en tickets, et une infrastructure d'entreprise sur deux sites.">
 <meta name="author" content="Jean-Philippe Rebischung">
-<meta property="og:title" content="Jean-Philippe Rebischung · Technicien Supérieur Systèmes et Réseaux">
+<meta property="og:title" content="Technicien Supérieur Systèmes et Réseaux · Jean-Philippe Rebischung">
 <meta property="og:description" content="CV et lab de Jean-Philippe Rebischung, Technicien Supérieur Systèmes et Réseaux : le métier en tickets, et une infrastructure d'entreprise sur deux sites.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Jean-Philippe Rebischung">
 <meta property="og:url" content="https://jp-rebischung.fr/">
-<meta property="og:image" content="https://jp-rebischung.fr/img/apercu-partage.jpg">
+<meta property="og:image" content="https://jp-rebischung.fr/img/apercu-partage-tssr.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Jean-Philippe Rebischung, Technicien Supérieur Systèmes et Réseaux : support N2, administration, lab d'entreprise.">
@@ -50,28 +50,41 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <p class="eyebrow">Titre professionnel TSSR · obtenu en 2026</p>
-        <h1>Jean-Philippe Rebischung<span>Technicien Supérieur Systèmes et Réseaux</span></h1>
-        <p class="lead">Je cherche un poste de <strong>technicien supérieur systèmes et réseaux</strong>, en support de niveau 2 ou en administration de parc, dans la <strong>métropole lilloise</strong>, à <strong>Dunkerque</strong> ou entre les deux.</p>
+        <p class="hero-nom">Jean-Philippe Rebischung</p>
+        <h1>Technicien Supérieur Systèmes et Réseaux</h1>
+        <p class="hero-sous">Support N2 · Exploitation · Administration systèmes et réseaux</p>
+        <p class="lead">Je cherche un poste en <strong>support de niveau 2</strong> ou en <strong>administration de parc</strong>, dans la <strong>métropole lilloise</strong>, à <strong>Dunkerque</strong> ou entre les deux.</p>
         <p class="lead">Ce site, c'est mon CV avec les preuves : des tickets réellement traités dans mon lab, du symptôme à la solution.</p>
         <div class="cta">
           <a class="btn btn-primary" href="competences.html">Voir mes compétences</a>
           <a class="btn btn-ghost" href="projet.html">Découvrir le projet</a>
           <a class="btn btn-ghost" href="docs/cv-jean-philippe-rebischung.pdf" download>Télécharger mon CV <span class="mono" aria-hidden="true">PDF</span></a>
         </div>
-        <ul class="facts" aria-label="Le lab en chiffres">
-          <li><b>2</b>sites reliés par VPN</li>
-          <li><b>2</b>domaines d'identité</li>
-          <li><b>12</b>sources de journaux</li>
-          <li><b>2</b>outils de supervision</li>
-          <li><b>2</b>postes d'audit</li>
-          <li><b>1</b>outil de tickets</li>
-        </ul>
       </div>
       <figure class="guide">
         <p class="bubble"><span class="who">Chester · poste client Windows 11</span>Un problème ? Un ticket, c'est une demande suivie jusqu'au bout.</p>
         <picture><source srcset="img/personnages/chester-salut.webp" media="(prefers-reduced-motion: reduce)"><img src="img/personnages/anim/chester-salut.webp" width="349" height="480" alt="Chester, un caméléon en gilet de bureau avec un badge JP Consulting, salue le visiteur."></picture>
       </figure>
+    </div>
+  </section>
+
+  <section class="section chiffres" aria-labelledby="chiffres">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="chiffres">Le lab en chiffres</h2>
+        <p>Chaque tuile mène à la preuve : le chantier ou les tickets correspondants.</p>
+      </div>
+      <ul class="kpis">
+        <li><a class="kpi" href="projet.html#ch-06"><span class="kpi-n">2</span><span class="kpi-t"><span class="kpi-l">sites reliés par VPN</span><span class="kpi-d">tunnel IPsec IKEv2, chiffrement AES-256</span></span></a></li>
+        <li><a class="kpi" href="projet.html#trust"><span class="kpi-n">2</span><span class="kpi-t"><span class="kpi-l">domaines d'identité</span><span class="kpi-d">Active Directory et FreeIPA reliés par une approbation</span></span></a></li>
+        <li><a class="kpi" href="projet.html#ch-01"><span class="kpi-n">2</span><span class="kpi-t"><span class="kpi-l">pare-feux pfSense</span><span class="kpi-d">filtrage strict et détection d'intrusion Suricata</span></span></a></li>
+        <li><a class="kpi" href="projet.html#ch-08"><span class="kpi-n">12</span><span class="kpi-t"><span class="kpi-l">sources de journaux</span><span class="kpi-d">centralisées sur un collecteur chiffré (RELP/TLS)</span></span></a></li>
+        <li><a class="kpi" href="projet.html#ch-03"><span class="kpi-n">6</span><span class="kpi-t"><span class="kpi-l">interfaces en HTTPS</span><span class="kpi-d">certificats de mon autorité de certification interne</span></span></a></li>
+        <li><a class="kpi" href="projet.html#ch-07"><span class="kpi-n">7</span><span class="kpi-t"><span class="kpi-l">machines gérées par Ansible</span><span class="kpi-d">durcissement SSH automatisé et vérifié</span></span></a></li>
+        <li><a class="kpi" href="projet.html#ch-04"><span class="kpi-n">111<small> s</small></span><span class="kpi-t"><span class="kpi-l">pour restaurer le domaine Linux</span><span class="kpi-d">sauvegardes vzdump réellement testées</span></span></a></li>
+        <li><a class="kpi" href="competences.html#file"><span class="kpi-n kpi-n-txt">N1/N2</span><span class="kpi-t"><span class="kpi-l">tickets traités dans GLPI</span><span class="kpi-d">du symptôme à la solution, cas publiés sur le site</span></span></a></li>
+        <li><a class="kpi" href="projet.html#ch-02"><span class="kpi-n">2</span><span class="kpi-t"><span class="kpi-l">postes d'audit Kali Linux</span><span class="kpi-d">attaques rejouées pour vérifier les défenses</span></span></a></li>
+      </ul>
     </div>
   </section>
 
